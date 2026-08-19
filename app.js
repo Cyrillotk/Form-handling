@@ -7,15 +7,42 @@ app.use(expresslayouts);
 
 app.use(express.urlencoded({extended:true}));
 app.get("/form", (req,res) => {
-    res.render("form",{
-        title: "Registration"
+    res.render("form");
+});
+app.post("/register", (req, res) => {
+
+    const name = req.body.name;
+    const email = req.body.email;
+    const message= req.body.message;
+
+    console.log(name);
+    console.log(email);
+    console.log(message);
+
+    res.render("result", {
+        name: name,
+        email: email,
+        age: message
+    });
+
+    app.post("/submit", (req, res) => {
+
+    const { name, email, age } = req.body;
+
+    if (!name || !email || !age) {
+        return res.send("Please fill in all fields.");
+    }
+
+    res.render("result", {
+        name,
+        email,
+        age
+    });
     });
 });
-
-app.post("/register", (req,res) => {
-    console.log(req.body);
-    res.send("registration successful");
-})
+app.listen(3000,() => {
+    console.log("server running on port 3000");
+});
 
 
 
