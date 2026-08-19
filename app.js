@@ -1,12 +1,10 @@
 const express = require("express");
-const expresslayouts = require("express-ejs-layouts");
 const app = express();
 
 app.set("view engine","ejs");
-app.use(expresslayouts);
 
 app.use(express.urlencoded({extended:true}));
-app.get("/form", (req,res) => {
+app.get("/", (req,res) => {
     res.render("form");
 });
 app.post("/register", (req, res) => {
@@ -25,12 +23,12 @@ app.post("/register", (req, res) => {
         age: message
     });
 
-    app.post("/submit", (req, res) => {
+    app.post("/register", (req, res) => {
 
-    const { name, email, age } = req.body;
+    const { name, email, message } = req.body;
 
-    if (!name || !email || !age) {
-        return res.send("Please fill in all fields.");
+    if (!name || !email || !message) {
+        return res.send("Fill in all fields.");
     }
 
     res.render("result", {
