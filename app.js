@@ -20,7 +20,7 @@ app.post("/register", (req, res) => {
     res.render("result", {
         name: name,
         email: email,
-        age: message
+        message: message
     });
 
     app.post("/register", (req, res) => {
